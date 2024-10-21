@@ -1,0 +1,49 @@
+linear: 
+
+# Load the dataset
+data(mtcars)
+
+# Linear regression model: mpg ~ hp
+linear_model <- lm(mpg ~ hp, data = mtcars)
+
+# Summary of the model
+summary(linear_model)
+
+# Plot the regression line
+plot(mtcars$hp, mtcars$mpg, main="Linear Regression: mpg vs hp", 
+     xlab="Horsepower (hp)", ylab="Miles per Gallon (mpg)")
+abline(linear_model, col="blue")
+
+
+logistic: 
+
+study_hours <- c(1, 2, 3, 4, 5, 6)
+pass_exam <- c(0, 0, 0, 1, 1, 1)  # 0 = Fail, 1 = Pass
+
+data <- data.frame(study_hours, pass_exam)
+logistic_model <- glm(pass_exam ~ study_hours, data = data, family = binomial)
+summary(logistic_model)
+new_data <- data.frame(study_hours = seq(1, 6, 0.1))
+new_data$predicted_prob <- predict(logistic_model, newdata = new_data, type = "response")
+ggplot(data, aes(x = study_hours, y = pass_exam)) +
+  geom_point(size = 3) +  # Add points
+  geom_line(data = new_data, aes(y = predicted_prob), color = "blue") +  # Add regression line
+  labs(title = "Logistic Regression: Probability of Passing vs Study Hours", x = "Study Hours", y = "Probability of Passing") +
+  ylim(-0.1, 1.1)  # Set y-axis limits
+
+
+multiple: 
+
+library(ggplot2)
+
+# Load the Orange dataset (comes with R)
+data(Orange)
+
+# Create initial ggplot with points
+ggplt <- ggplot(Orange, aes(x = circumference, y = age, shape = Tree)) + 
+         geom_point() + 
+         theme_classic()
+
+# Plotting multiple regression lines
+ggplt + geom_smooth(method = lm, se = FALSE, fullrange = TRUE, aes(color = Tree))
+

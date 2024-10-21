@@ -1,0 +1,46 @@
+one-time:
+
+install.packages("dplyr")
+library(dplyr)
+
+# Sample dataset: mtcars
+data(mtcars)
+
+# One-time query: Get average miles per gallon (mpg) for cars with more than 4 cylinders
+result <- mtcars %>%
+  filter(cyl > 4) %>%
+  summarize(avg_mpg = mean(mpg))
+
+print(result)
+
+
+ad-hoc:
+# Ad hoc query: Get the average petal length for the species 'setosa'
+ad_hoc_result <- iris %>%
+  filter(Species == "setosa") %>%
+  summarize(avg_petal_length = mean(Petal.Length))
+
+print(ad_hoc_result)
+
+
+continuous:
+packages.install("later")
+library(later)
+
+# Sample data
+data <- data.frame(id = 1:5, value = c(10, 20, 30, 40, 50))
+
+# Function to simulate continuous query
+check_for_updates <- function() {
+  print("Running query to check for updates...")
+  
+  # Query: Get rows where value > 25
+  result <- data %>% filter(value > 25)
+  print(result)
+  
+  # Re-run this function after 5 seconds (continuous querying)
+  later::later(check_for_updates, 5)
+}
+
+# Start the continuous query simulation
+check_for_updates()

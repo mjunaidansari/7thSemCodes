@@ -1,0 +1,28 @@
+Scatter Plot: 
+library(ggplot2)
+
+ggplot(mtcars, aes(hp, mpg)) + 
+  geom_point(color = "blue") + 
+  labs(title = "MPG vs. Horsepower", x = "Horsepower", y = "MPG")
+
+Line Plot: 
+ggplot(mtcars, aes(wt, mpg)) + 
+  geom_line(color = "red") + 
+  geom_point() + 
+  labs(title = "MPG vs. Weight", x = "Weight", y = "MPG")
+
+Bar Plot: 
+ggplot(mtcars, aes(factor(cyl))) + 
+  geom_bar(fill = "steelblue") + 
+  labs(title = "Cars by Cylinders", x = "Cylinders", y = "Count")
+
+Box Plot: 
+ggplot(mtcars, aes(factor(cyl), mpg)) + 
+  geom_boxplot(fill = "lightgreen") + 
+  labs(title = "MPG by Cylinders", x = "Cylinders", y = "MPG")
+
+Histogram: 
+ggplot(mtcars, aes(mpg)) + 
+  geom_histogram(binwidth = 2, fill = "purple", color = "white") + 
+  labs(title = "Histogram of MPG", x = "MPG")
+
